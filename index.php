@@ -1,28 +1,47 @@
 <?php
-
-// Includi i file delle classi necessarie
-require './models/Categories.php';
-require './models/Products.php';
-require './models/FoodProduct.php';
-require './models/Accessories.php';
-require './models/ToysProduct.php';
-
-// Creazione della categoria "Cani" con la relativa immagine 
-$categoriaCani = new Category("Cani", "https://www.b2x.it/rest/images/2023/11/15/1488336.jpg?imageFormat=@1x");
-
-// Creazione del prodotto "GastroIntestinal" con la relativa immagine
-$prodotto1 = new FoodProduct("#01", "GastroIntestinal", "Crocchette per problemi gastro intestinali", "20€", "https://www.robinsonpetshop.it/news/cms2017/wp-content/uploads/2019/08/crocchette-italiane.png", $categoriaCani, "cibo secco", "manzo, cereali e fermenti lattici");
-
-// Creazione del prodotto "Pettorina" con la relativa immagine
-$prodotto2 = new Accessories("#02", "Pettorina", "Pettorina per cani", "15€", "https://m.media-amazon.com/images/I/51eOTU5+qqL.jpg", $categoriaCani, "nickel");
-
-// Creazione del prodotto "Pallina" con la relativa immagine
-$prodotto3 = new ToysProduct("#03", "Pallina", "Pallina  cani", "5€", "https://shop-cdn-m.mediazs.com/bilder/4/400/55500_pla_hundespielzeug_squeaky_ball_aus_tpr_4.jpg", $categoriaCani, "gioco", "gomma");
-
-// Mostra informazioni su prodotti e categorie
-var_dump($prodotto1);
-var_dump($prodotto2);
-var_dump($prodotto3);
-var_dump($categoriaCani);
-
+    // Includi il file db.php
+    require './database.php';
 ?>
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prodotti</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+   .card-img-top {
+    height: 200px;
+    object-fit: cover; 
+}
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Prodotti</h1>
+        <!-- Cards dei Prodotti -->
+        <div class="row">
+            <?php foreach ($ArrayProduct as $prodotto) { ?>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="<?php echo $prodotto->image; ?>" class="card-img-top" alt="<?php echo $prodotto->name; ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $prodotto->name; ?></h5>
+                            <p class="card-text"><?php echo $prodotto->description; ?></p>
+                            <p class="card-text"><strong>ID:</strong> <?php echo $prodotto->id; ?></p>
+
+                            <p class="card-text"><strong>Prezzo:</strong> <?php echo $prodotto->price; ?></p>
+                            <p class="card-text"><strong>Categoria:</strong> <?php echo $prodotto->category->name; ?></p>
+
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
