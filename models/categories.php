@@ -4,13 +4,13 @@
 class Category {
     //  proprietà della classe
     public $name; 
-    public $image; 
+    public $icon; 
 
     //  costruttore della classe
-    public function __construct($name, $image) {
+    public function __construct($name, $icon) {
         //  valori passati come argomenti al costruttore
         $this->name = $name;
-        $this->image = $image;
+        $this->icon = $icon;
     }
 }
 

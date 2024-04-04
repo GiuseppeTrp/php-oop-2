@@ -4,7 +4,7 @@
 class accessories extends Product {
     
     // Dichiarazione della proprietà pubblica $material
-    public $material;
+    public $materials;
 
     // Definizione del costruttore della classe Accessories
     public function __construct($id, $name, $description, $price, $image, $category, $material) {
@@ -13,7 +13,7 @@ class accessories extends Product {
         parent::__construct($id, $name, $description, $price, $image, $category);
         
         // Assegnazione del valore del parametro $material alla proprietà $material dell'istanza corrente
-        $this->material = $material;
+        $this->materials = $material;
     }
 }
 

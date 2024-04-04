@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/Products.php';
+
 // Dichiarazione della classe FoodProduct che estende Product
 class FoodProduct extends Product
 {

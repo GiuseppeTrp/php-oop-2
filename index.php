@@ -11,37 +11,73 @@
     <title>Prodotti</title>
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-   .card-img-top {
-    height: 200px;
-    object-fit: cover; 
-}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+   
+   <style>
+     .card .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Prodotti</h1>
-        <!-- Cards dei Prodotti -->
-        <div class="row">
-            <?php foreach ($ArrayProduct as $prodotto) { ?>
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <img src="<?php echo $prodotto->image; ?>" class="card-img-top" alt="<?php echo $prodotto->name; ?>">
+    <div class="container py-5">
+        <h1 class="text-center">
+            Shop Prodotti
+        </h1>
+
+        <div class="row row-cols-2 row-gap-4">
+
+            <?php
+            foreach ($ArrayProduct as $prodotto) {
+                ?>
+                <div class="col">
+                    <div class="card">
+                        <img src="<?= $prodotto->image ?>" class="card-img-top" alt="<?= $prodotto->name ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $prodotto->name; ?></h5>
-                            <p class="card-text"><?php echo $prodotto->description; ?></p>
-                            <p class="card-text"><strong>ID:</strong> <?php echo $prodotto->id; ?></p>
+                            <h5 class="card-title d-flex justify-content-between text-secondary">
+                                <span><?= $prodotto->name ?></span>
+                                <span><i class="fa-solid <?= $prodotto->category->icon ?>"></i></span>
+                            </h5>
+                            <p class="card-text"><?= $prodotto->description ?></p>
+                            <p class="card-text"><strong>ID:</strong> <?= $prodotto->id ?></p>
+                            <p class="card-text"><strong>Prezzo:</strong> <?= $prodotto->price ?></p>
+                            <p class="card-text"><strong>Categoria:</strong> <?= $prodotto->category->name ?></p>
 
-                            <p class="card-text"><strong>Prezzo:</strong> <?php echo $prodotto->price; ?></p>
-                            <p class="card-text"><strong>Categoria:</strong> <?php echo $prodotto->category->name; ?></p>
+                            <div class="details">
+                                <ul class="list-unstyled">
+                                    <?php
 
+                                    // controlliamo di che tipo sia il prodotto
+                                    if ($prodotto instanceof Accessories) {
+                                        echo '<li> <strong>Materiale:</strong> ' . $prodotto->materials . '</li>';
+
+                                    } else if ($prodotto instanceof ToysProduct) {
+
+                                        echo '<li><strong>Materiale:</strong>  ' . $prodotto->materials . '</li>';
+
+                                    } else if ($prodotto instanceof FoodProduct) {
+
+                                        echo '<li><strong>Ingredienti</strong> ' . $prodotto->ingredients . '</li>';
+
+                                    }
+
+
+                                    ?>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php
+        }
+
+        ?>
+
+
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

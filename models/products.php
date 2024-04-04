@@ -20,6 +20,12 @@ class Product {
         $this->image = $image;
         $this->category = $category;
     }
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
+
+   
 }
 
 ?>
